@@ -41,22 +41,23 @@ $ yarn run start
 # watch mode
 $ yarn run start:dev
 
-# production mode
+# production mode (what you will want so it runs with the least power consumption)
 $ yarn run start:prod
 ```
 
-## Test
+## How it works
 
-```bash
-# unit tests
-$ yarn run test
+- Server is spun up in main.ts using AppModule
+- This AppModule then specifies which controllers, services, other modules to be used. This app attempts to reuse the same instances of these services/files to reduce power/usage (automajically)
+- When a request is submitted, Code will start to be executed in the proper controller of the request. So a GET request to / will execute the getHello method in the AppController
+- "Services" are a further abstraction from the controllers to separate various duties throughout the server (business logic, fetching data from other sources, etc).
+- Other controllers and services can be created, they just need to be added to the AppModule. They will also need to be given new routes as anotated above their corresponding controller methods/functions
 
-# e2e tests
-$ yarn run test:e2e
+### Camera Module
 
-# test coverage
-$ yarn run test:cov
-```
+- utilizes https://elinux.org/RPi-Cam-Web-Interface so make sure you have it downloaded and have run the install script
+- this module makes use of the start and stop scripts
+- You should take a look at the docs for its config file. Looks like there is motion detection, snapshots, recording, etc
 
 ## Support
 
